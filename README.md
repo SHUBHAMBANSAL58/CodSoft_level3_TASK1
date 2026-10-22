@@ -27,3 +27,4 @@ Tech stack: **HTML / CSS / JavaScript**, **Node.js + Express**, **SQLite**.
 | Dev tools | VS Code, npm, nodemon |
 
 ## 📂 Project Structure
+ecommerce-store/ │ server.js │ package.json │ .env │ ├─ database/ │ └─ database.js ├─ middleware/ │ └─ authMiddleware.js ├─ routes/ │ ├─ products.js │ ├─ auth.js │ └─ orders.js └─ public/ ├─ index.html ├─ product.html ├─ cart.html ├─ login.html ├─ register.html ├─ checkout.html ├─ orders.html ├─ css/ │ └─ style.css └─ js/ ├─ app.js ├─ product.js ├─ cart.js ├─ auth.js ├─ checkout.js └─ orders.j
