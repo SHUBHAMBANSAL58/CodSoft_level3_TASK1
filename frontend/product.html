@@ -1,0 +1,21 @@
+﻿<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"><title>Product Details</title><link rel="stylesheet" href="css/style.css"></head>
+<body>
+<header><a href="index.html" class="logo">🛍️ SimpleShop</a><nav><a href="index.html">Home</a><a href="cart.html">Cart <span class="badge" id="cart-count">0</span></a></nav></header>
+<main id="det" style="background:white;padding:2rem;border-radius:8px;"></main>
+<script src="js/app.js"></script>
+<script>
+const id = new URLSearchParams(location.search).get('id');
+api(`/products/${id}`).then(p => {
+  document.getElementById('det').innerHTML = `
+    <h2>${p.name}</h2>
+    <img src="${p.image_url}" style="max-width:350px;border-radius:8px;margin:1rem 0;">
+    <p>${p.description}</p>
+    <p style="font-size:1.5rem;font-weight:bold;margin:1rem 0;">$${(p.price_cents/100).toFixed(2)}</p>
+    <button class="btn" onclick="addToCart(${p.id})">Add to Cart</button>
+  `;
+});
+</script>
+</body>
+</html>

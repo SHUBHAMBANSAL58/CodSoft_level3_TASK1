@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"><title>SimpleShop</title><link rel="stylesheet" href="css/style.css"></head>
+<body>
+<header>
+  <a href="index.html" class="logo">🛍️ SimpleShop</a>
+  <nav>
+    <a href="index.html" class="active">Home</a>
+    <a href="cart.html">Cart <span class="badge" id="cart-count">0</span></a>
+    <a href="orders.html">My Orders</a>
+    <a href="login.html" id="auth-link">Login</a>
+  </nav>
+</header>
+<main>
+  <div style="display:flex;gap:0.5rem;justify-content:center;margin-bottom:2rem;">
+    <input type="text" id="s" placeholder="Search..." style="width:300px;">
+    <select id="c" style="width:160px;">
+      <option value="">All Categories</option>
+      <option value="Apparel">Apparel</option>
+      <option value="Accessories">Accessories</option>
+      <option value="Electronics">Electronics</option>
+    </select>
+    <button class="btn" onclick="load()">Filter</button>
+  </div>
+  <div class="products-grid" id="grid"></div>
+</main>
+<footer>&copy; 2026 CodeAlpha Full Stack Internship</footer>
+<script src="js/app.js"></script>
+<script>
+async function load() {
+  const s = document.getElementById('s').value;
+  const c = document.getElementById('c').value;
+  const prods = await api(`/products?search=${encodeURIComponent(s)}&category=${encodeURIComponent(c)}`);
+  document.getElementById('grid').innerHTML = prods.map(p => `
+    <div class="card">
+      <img src="${p.image_url}" onclick="location.href='product.html?id=${p.id}'">
+      <div class="card-body">
+        <h3 onclick="location.href='product.html?id=${p.id}'">${p.name}</h3>
+        <p style="color:#64748b;font-size:0.9rem;">${p.description}</p>
+        <div class="price">$${(p.price_cents/100).toFixed(2)}</div>
+        <button class="btn" onclick="addToCart(${p.id})">Add to Cart</button>
+      </div>
+    </div>
+  `).join('');
+}
+load();
+</script>
+</body>
+</html>

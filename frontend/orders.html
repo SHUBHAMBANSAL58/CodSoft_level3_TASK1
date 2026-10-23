@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"><title>My Orders</title><link rel="stylesheet" href="css/style.css"></head>
+<body>
+<header><a href="index.html" class="logo">🛍️ SimpleShop</a><nav><a href="index.html">Home</a><a href="cart.html">Cart</a></nav></header>
+<main>
+  <h2>My Orders</h2>
+  <div id="orders" style="margin-top:1rem;"></div>
+</main>
+<script src="js/app.js"></script>
+<script>
+api('/orders/my').then(list => {
+  if(!list.length) return document.getElementById('orders').innerHTML = '<p>No orders yet.</p>';
+  document.getElementById('orders').innerHTML = list.map(o => `
+    <div style="background:white;padding:1rem;margin-bottom:1rem;border-radius:8px;">
+      <h3>Order #${o.id} - $${(o.total_cents/100).toFixed(2)}</h3>
+      <p style="color:#64748b;">${new Date(o.created_at).toLocaleString()}</p>
+      <p>Address: ${o.shipping_address}</p>
+      <ul>${o.items.map(it => `<li>${it.quantity}x ${it.name}</li>`).join('')}</ul>
+    </div>
+  `).join('');
+}).catch(() => document.getElementById('orders').innerHTML = '<p>Please <a href="login.html">login</a>.</p>');
+</script>
+</body>
+</html>
