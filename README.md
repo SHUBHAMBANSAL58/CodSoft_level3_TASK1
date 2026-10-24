@@ -1,4 +1,4 @@
-# CodeAlpha_Ecommerce_Store
+# Ecommerce_Store
 A full-stack e-commerce store built with HTML, CSS, JavaScript, Node.js, and Express.js.
 # Simple E‑commerce Store
 > Beginner‑friendly full‑stack project for the **CodeAlpha Full Stack Development Internship**
